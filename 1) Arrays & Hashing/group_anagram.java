@@ -1,71 +1,32 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class group_anagram {
     public static void main(String[] args) {
-        String[] group = { "act", "cat"};
-        String[] result = anagram_identifier(group);
+        String[] group = { "act", "cat" };
+        anagram_identifier(group);
+
     }
 
-    static String[] anagram_identifier(String[] group) {
+    static void anagram_identifier(String[] group) {
+        ArrayList resultant_Array = new ArrayList<>();
 
-        for (int i = 0; i < group.length; i++) {
+        String[] a = { "abc" };
+        String[] b = { "efg" };
+        String[] c = { "hji", "klmo" };
 
-
-
-
-
-
-
-
-
+        resultant_Array.add(a);
+        resultant_Array.add(c);
+        resultant_Array.add(b);
 
 
+        System.out.println("Arraylist size: "+resultant_Array.size());
 
-
-
-
-
-
-
-
-
-
-
-
-
-            char[] toFocus = group[i].toCharArray();
-
-            for (int j = 0; j < group.length; j++) {
-
-
-
-                
-
-                if (i == j)
-                    continue;
-
-                char[] toCheck = group[j].toCharArray();
-
-                if (toFocus.length == toCheck.length) {
-                    boolean found = false;
-
-                    for (int k = 0; k < toCheck.length; k++) {
-                        for (int k2 = 0; k2 < toCheck.length; k2++) {
-                            // int count=0;
-
-                            if (toFocus[i] == toCheck[j] && toFocus[i] != '-') {
-                                found = true;
-                                toFocus[i] = '-';
-                                toCheck[j] = '-';
-                            }
-
-                            if (!found) {
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        return group;
+        // for (int i = 0; i < resultant_Array.length; i++) {
+        // for (int j = 0; j < resultant_Array.length; j++) {
+        // System.out.println(resultant_Array[i][j]);
+        // }
+        // }
     }
 }
