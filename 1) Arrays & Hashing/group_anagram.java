@@ -10,23 +10,74 @@ public class group_anagram {
     }
 
     static void anagram_identifier(String[] group) {
-        ArrayList resultant_Array = new ArrayList<>();
+
+        ArrayList<String[]> resultant_Array = new ArrayList<>();
 
         String[] a = { "abc" };
-        String[] b = { "efg" };
-        String[] c = { "hji", "klmo" };
+
+        for (int i = 0; i < group.length; i++) {
+
+            char[] toFocus = group[i].toCharArray();
+
+            for (int j = 0; j < group.length; j++) {
+
+                if (i == j)
+                    continue;
+        
+                    char[] toCheck = group[j].toCharArray();
+
+                if (toFocus.length == toCheck.length) {
+                    boolean found = false;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    for (int k = 0; k < toCheck.length; k++) {
+
+                        for (int k2 = 0; k2 < toCheck.length; k2++) {
+
+                            if (toFocus[k] == toCheck[k2] && toFocus[i] != '-') {
+                                found = true;
+                                toFocus[i] = '-';
+                                toCheck[j] = '-';
+                            }
+                        }
+
+
+
+                        if (!found) {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
 
         resultant_Array.add(a);
-        resultant_Array.add(c);
-        resultant_Array.add(b);
 
+        String[][] result = resultant_Array.toArray(new String[0][]);
+        for (String[] strings : result) {
 
-        System.out.println("Arraylist size: "+resultant_Array.size());
+            for (String strings2 : strings) {
 
-        // for (int i = 0; i < resultant_Array.length; i++) {
-        // for (int j = 0; j < resultant_Array.length; j++) {
-        // System.out.println(resultant_Array[i][j]);
-        // }
-        // }
+                System.out.print(strings2);
+            }
+            System.out.println();
+        }
+
     }
 }
