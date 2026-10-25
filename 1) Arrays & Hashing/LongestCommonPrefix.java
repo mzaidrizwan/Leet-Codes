@@ -2,49 +2,56 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Solution {
-    public static String longestCommonPrefix(String[] strs) {// { "bat", "bag", "vi", "vii", "yoyo", "bank", "band",
-                                                             // "yo" }
-                                                             // 4-ba
-                                                             // vi, vii,yoyo,yo
+    public static String longestCommonPrefix(String[] strs) { // { "at", "bag", "vi", "vii", "yoyo", "bank", "band",
+                                                              // "yo" }
 
         List<String> prefixes = new ArrayList<>();
-        boolean remaining = true;
         String common_str = "";
         List<Integer> different_prefixes = new ArrayList<>();
         different_prefixes.add(0);
-        // ba
-        // 0
-        // bag
+        different_prefixes.add(1);
+        int iteration = strs.length;
+        //
+        //
+        //
+        //
         do {
 
-            char[] focused_char = strs[different_prefixes.getFirst()].toCharArray();
-            int i = 0;
+            int i = 1;
+            char[] focused_char = strs[different_prefixes.get(i - 1)].toCharArray();
 
-            while (i < strs.length()) {
+            while (i < iteration) {
 
-                char[] element_char = strs[i + 1].toCharArray();
+                char[] element_char = strs[different_prefixes.get(i)].toCharArray();
 
-                if (focused_char[0] == element_char[0]) {
-                    different_prefixes.add(i);
+                if (focused_char[0] != element_char[0]) {
+                    different_prefixes.add(i++);
                     continue;
                 }
 
-                int j=0;
-                
-                while ((focused_char.length() >= j) && (element_char.length() >= j)) {
+                int j = 0;
 
-                    if (  focused_char[j] == element_char[j]) {
+                while ((focused_char.length >= j) && (element_char.length >= j)) {
+
+                    if (focused_char[j] == element_char[j]) {
                         common_str += element_char[j++];
                     } else {
                         break;
                     }
 
                 }
+                ++i;
 
             }
 
-            prefixes.add(common_str);
-            prefixes.removeFirst();
+            if (common_str != "") {
+                prefixes.add(common_str);
+                different_prefixes.removeFirst();
+            } else {
+                different_prefixes.add(i - iteration);
+            }
+            iteration = different_prefixes.size();
+
         } while (different_prefixes.size() != 0);
 
         return "a";
