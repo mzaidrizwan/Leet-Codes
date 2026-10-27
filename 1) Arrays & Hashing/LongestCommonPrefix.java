@@ -2,63 +2,60 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Solution {
-    public static String longestCommonPrefix(String[] strs) { // { "at", "bag", "vi", "vii", "yoyo", "bank", "band",
-                                                              // "yo" }
+    public static String longestCommonPrefix(String[] strs) { // { "at", "bag", "vi", "vii", "yoyo", ("bank"),
+                                                              // "band","yo" }
 
-        List<String> prefixes = new ArrayList<>();
-        String common_str = "";
-        List<Integer> different_prefixes = new ArrayList<>();
-        different_prefixes.add(0);
-        different_prefixes.add(1);
-        int iteration = strs.length;
-        //
-        //
-        //
-        //
-        do {
+        List<String> filtered_prefixes = new ArrayList<>();
+        for (int i = 0; i < strs.length; i++) {
+            filtered_prefixes.add(strs[i]);
+        }
 
-            int i = 1;
-            char[] focused_char = strs[different_prefixes.get(i - 1)].toCharArray();
+        for (int i = 0; i < filtered_prefixes.size(); i++) {
+            int repition = 1;
+            char[] focused_element = filtered_prefixes.get(i).toCharArray();
 
-            while (i < iteration) {
+            for (int j = i + 1; j < filtered_prefixes.size(); j++) {
+                char[] element = filtered_prefixes.get(j).toCharArray();
+                String common_str = "";
+                int n;
 
-                char[] element_char = strs[different_prefixes.get(i)].toCharArray();
+                if (element.length < focused_element.length)
+                    n = element.length;
+                else
+                    n = focused_element.length;
 
-                if (focused_char[0] != element_char[0]) {
-                    different_prefixes.add(i++);
-                    continue;
-                }
+                for (int k = 0; k < n; k++) {
 
-                int j = 0;
-
-                while ((focused_char.length >= j) && (element_char.length >= j)) {
-
-                    if (focused_char[j] == element_char[j]) {
-                        common_str += element_char[j++];
+                    if (focused_element[k] == element[k]) {
+                        common_str += element[k];
                     } else {
                         break;
                     }
 
                 }
-                ++i;
 
+                if (common_str != "") {
+                    repition++;
+                    filtered_prefixes.remove(j);
+                    filtered_prefixes.set(i, common_str);
+                    focused_element = common_str.toCharArray();
+                    --j;
+                }
             }
 
-            if (common_str != "") {
-                prefixes.add(common_str);
-                different_prefixes.removeFirst();
-            } else {
-                different_prefixes.add(i - iteration);
-            }
-            iteration = different_prefixes.size();
+            filtered_prefixes.set(i, repition + filtered_prefixes.get(i));
 
-        } while (different_prefixes.size() != 0);
+        }
+
+        for (int i = 0; i < filtered_prefixes.size(); i++) {
+            System.out.println(filtered_prefixes.get(i)+'\n');
+        }
 
         return "a";
     }
 
     public static void main(String[] args) {
-        String[] strs = { "bat", "bag", "vi", "vii", "yoyo", "bank", "band", "yo" };
+        String[] strs = { "at", "bag", "vi", "vii", "yoyo", "bank", "band", "yo" };
         String output = longestCommonPrefix(strs);
         System.out.println(output);
     }
